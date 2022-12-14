@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npx prisma generate & npx prisma generate --schema ./prisma2/schema.prisma",
+    "prebuild": "yarn prisma-generate",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma-pull": "npx prisma db pull & npx prisma db pull --schema ./prisma2/schema.prisma",
+    "prisma-push": "npx prisma db push & npx prisma db push --schema ./prisma2/schema.prisma",
+    "prisma-generate": "npx prisma generate & npx prisma generate --schema ./prisma2/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^3.15.2",

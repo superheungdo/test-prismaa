@@ -1,18 +1,14 @@
 import firstPrismaClient from "../lib/firstClient";
 import secondPrismaClient from "../lib/secondClient";
 
-const Home = ({ device, admin }) => {
+const Home = ({ firstUser, secondUser }) => {
   return (
     <div className="bg-red-300 w-full h-screen grid grid-cols-16">
       <div className="bg-green-200">
-        {device.map((item) => (
-          <div key={item.id}>name: {item.name}</div>
-        ))}
+        <div>name: {firstUser.name}</div>
       </div>
       <div className="bg-blue-200">
-        {admin.map((item) => (
-          <div key={item.id}>name: {item.name}</div>
-        ))}
+        <div>name: {secondUser.username}</div>
       </div>
       <div className="bg-orange-200">3</div>
     </div>
@@ -22,16 +18,16 @@ const Home = ({ device, admin }) => {
 export default Home;
 
 export const getServerSideProps = async () => {
-  const device = await firstPrismaClient.device.findMany();
-  const admin = await secondPrismaClient.admin.findMany();
+  const firstUser = await firstPrismaClient.user.findFirst();
+  const secondUser = await secondPrismaClient.user.findFirst();
 
-  console.log("device: ", device);
-  console.log("admin: ", admin);
+  console.log("firstUser: ", firstUser);
+  console.log("secondUser: ", secondUser);
 
   return {
     props: {
-      device,
-      admin,
+      firstUser,
+      secondUser,
     },
   };
 };

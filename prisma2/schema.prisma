@@ -8,8 +8,36 @@ datasource db {
   url      = env("SECOND_DATABASE_URL")
 }
 
-model Admin {
-  id String @default(uuid()) @id
-  name String @unique
-  email String @unique
+model Comment {
+  id      String @id
+  comment String
+  pinId   String
+  Pin     Pin    @relation(fields: [pinId], references: [id])
+}
+
+model Pin {
+  id          String    @id
+  title       String
+  about       String
+  destination String
+  category    String
+  image       String
+  userId      String
+  User        User      @relation(fields: [userId], references: [id])
+  Comment     Comment[]
+  Save        Save[]
+}
+
+model Save {
+  id     String @id
+  userId String
+  pinId  String
+  Pin    Pin    @relation(fields: [pinId], references: [id])
+}
+
+model User {
+  id       String @id
+  username String
+  image    String
+  Pin      Pin[]
 }
