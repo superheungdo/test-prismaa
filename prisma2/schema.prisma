@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@internal/prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("SECOND_DATABASE_URL")
+}
+
+model Admin {
+  id String @default(uuid()) @id
+  name String @unique
+  email String @unique
+}
